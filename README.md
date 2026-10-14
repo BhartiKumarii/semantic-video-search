@@ -62,7 +62,8 @@ segments beat hybrid search, and every "fancier" setup I measured did worse:
   2.5× the query latency, so MiniLM is the default.
 
 The one question vector search misses is a metaphor (a "flavored water" analogy). It
-shares no words or meaning with the question, and none of the variants above fixed it.
+shares no vocabulary with the question, and the connection is only through the analogy, so
+none of the variants above fixed it.
 
 These findings are recorded in the docstring and comments of
 [`apps/bharti/experiments.py`](apps/bharti/experiments.py). Each experiment changes
