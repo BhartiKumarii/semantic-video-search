@@ -171,4 +171,6 @@ corpus/        extracted transcripts and JSON for two recordings (day1, day2)
 
 Built on a course-provided extraction pipeline, corpus and evaluation harness
 (`starter/`, `tools/`, `corpus/`). The embeddings, indexing, experiments and search app
-in `apps/bharti/` are my own work.
+in `apps/bharti/` are my own work, as are the three functions the course left as stubs
+in `starter/`: `embed_texts()` in `embed.py`, and `search_vector()` and `search_hybrid()`
+in `search.py`.
