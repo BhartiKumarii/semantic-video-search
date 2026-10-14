@@ -1,11 +1,13 @@
-"""Your search app. Deploys to the box behind your own Cloudflare tunnel.
+"""Semantic search service over the lecture-recording corpus.
 
-It already RUNS as-is (/, /healthz work). Your job is the two stubs below,
-embed_query() and search_vector(). Until you fill them, /api/search returns a
-501 telling you so. Model the implementations on ../_reference.
+Embeds the query with all-MiniLM-L6-v2 (the same model used to embed the
+corpus) and returns the nearest transcript segments from pgvector. Keyword
+(Postgres full-text) and hybrid (RRF) search are exposed alongside for
+comparison; vector is the default because it scored best on the golden set.
 
-Contract (do not change): ASGI `app`, bind 127.0.0.1 on $PORT, read PG* from
-env, keep /healthz. Deploy = push to main.
+Routes: GET / (search page), POST /api/search, GET /healthz.
+Reads PG* and EMBED_MODEL from the environment. Run with:
+    uvicorn main:app --host 127.0.0.1 --port 8000
 """
 import os
 
@@ -38,7 +40,7 @@ def get_conn() -> psycopg.Connection:
 
 
 # ---------------------------------------------------------------------------
-# YOUR WORK — implement these two. See ../_reference for a working version.
+# Vector search — the default method.
 # ---------------------------------------------------------------------------
 def embed_query(text: str) -> list[float]:
     """Embed the query with the SAME model you embedded the corpus with.
@@ -117,7 +119,7 @@ SEARCHERS = {"vector": search_vector, "keyword": search_keyword, "hybrid": searc
 
 
 # ---------------------------------------------------------------------------
-# Given — the serving layer. You should not need to change below here.
+# Serving layer.
 # ---------------------------------------------------------------------------
 
 class SearchReq(BaseModel):
