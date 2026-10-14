@@ -8,7 +8,8 @@ venv/
 tools/*.wav
 corpus/**/frames/
 corpus/**/crops/
-*.pt          # downloaded YOLO weights
+# downloaded YOLO weights
+*.pt
 yolov8n.pt
 
 # Local env / secrets
